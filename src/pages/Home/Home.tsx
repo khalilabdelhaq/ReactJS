@@ -9,9 +9,11 @@ const Home: React.FC<{}> = () => {
   return (
     <>
       <Styles.Container>
-        {items.map((item) => (
-          <ItemComponent item={item}></ItemComponent>
-        ))}
+        {items
+          .filter((item) => item.id === 1)
+          .map((item) => (
+            <ItemComponent item={item}></ItemComponent>
+          ))}
       </Styles.Container>
     </>
   )
