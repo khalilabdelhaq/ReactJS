@@ -5,6 +5,11 @@ type Props = {
 }
 const CardFC: React.FC<Props> = ({ src }) => {
   const [value, setValue] = React.useState('value du state')
+
+  React.useEffect(() => {
+    console.log("useEffect without dependencies')")
+  })
+
   React.useEffect(() => {
     console.log("console.log('[CardFC] - [useEffect] - Equivalent de componentDidMount()')")
   }, [])
