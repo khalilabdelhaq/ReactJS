@@ -1,16 +1,28 @@
-import { mockedCategories, mockedItems, mockedVilles } from './fixtures'
-import { ADD_ITEM, FILTER_ITEMS, ItemState, ItemActionTypes } from './types'
+import { mockedCategories, mockedItems, mockedVilles } from "./fixtures";
+import {
+  ADD_ITEM,
+  FILTER_ITEMS,
+  ItemState,
+  ItemActionTypes,
+  GET_ITEMS,
+} from "./types";
 
 const initialItemState: ItemState = {
-  items: mockedItems,
+  items: [],
   filteredItems: [],
-}
+};
 
 export function itemReducer(
   state: ItemState = initialItemState,
   action: ItemActionTypes
 ): ItemState {
   switch (action.type) {
+    case GET_ITEMS: {
+      return {
+        ...state,
+        items: mockedItems,
+      };
+    }
     case ADD_ITEM: {
       return {
         ...state,
@@ -21,14 +33,17 @@ export function itemReducer(
             title: action.payload.title,
             adress: action.payload.adress,
             category: mockedCategories.find(
-              (item) => !!action.payload.category && item.id === action.payload.category.id
+              (item) =>
+                !!action.payload.category &&
+                item.id === action.payload.category.id
             ),
             ville: mockedVilles.find(
-              (item) => action.payload.ville && item.id === action.payload.ville.id
+              (item) =>
+                action.payload.ville && item.id === action.payload.ville.id
             ),
           },
         ],
-      }
+      };
     }
     case FILTER_ITEMS: {
       return {
@@ -40,9 +55,9 @@ export function itemReducer(
             item.category &&
             item.category.id === action.payload.category
         ),
-      }
+      };
     }
     default:
-      return state
+      return state;
   }
 }
