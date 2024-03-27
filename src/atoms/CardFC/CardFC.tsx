@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Styles } from '../Card.style'
+import { Styles } from './CardFC.style'
 type Props = {
   src: string
 }
@@ -11,13 +11,25 @@ const CardFC: React.FC<Props> = ({ src }) => {
   })
 
   React.useEffect(() => {
-    console.log("console.log('[CardFC] - [useEffect] - Equivalent de componentDidMount()')")
-  }, [])
+    console.log(
+      "console.log('[CardFC] - [useEffect] - Equivalent de componentDidMount()')"
+    )
+    return () => {
+      console.log(
+        "console.log('[CardFC] - [useEffect] - Equivalent de componentWillUnmount()')"
+      )
+    }
+  }, []) // Empty dependency array indicates the effect should only run once
 
   React.useEffect(() => {
-    console.log("console.log('[CardFC] - [useEffect] - Equivalent de componentDidUpdate()')")
+    console.log(
+      "console.log('[CardFC] - [useEffect] - Equivalent de componentDidUpdate()')"
+    )
     return () => {
-      console.log("console.log('[CardFC] - [useEffect] - Equivalent de componentWillUnmount()')")
+      console.log(
+        "console.log('[CardFC] - [useEffect] - Equivalent de componentWillUnmount()')"
+        // cleans up effects from the previous render before running the effects next time.”
+      )
     }
   }, [value])
 
